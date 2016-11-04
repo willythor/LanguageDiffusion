@@ -3,6 +3,7 @@ Github: https://github.com/willythor/LanguageDiffusion
 # A Simple Model for Language Diffusion 
 
 ## Sungwoo Park, Willem Thorbecke, Ziyu (Selina) Wang
+## Team Name: Shoots Den!
 
 ### Abstract:
 
