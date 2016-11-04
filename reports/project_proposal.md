@@ -1,5 +1,7 @@
 Github: https://github.com/willythor/LanguageDiffusion
+
 A Simple Model for Language Diffusion 
+
 Sungwoo Park, Willem Thorbecke, Ziyu (Selina) Wang
 
 
@@ -20,14 +22,14 @@ This paper models the process of language evolution through a simulation model c
 
 Berrah, Glotin, Laboissiere, Bessiere, Boe, “From Form to Formation of Phonetic Structures: An evolutionary computing perspective”
 
-Downloaded from: <http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=237E415FCEE4528600B201AC44CB51A0?doi=10.1.1.54.7332&rep=rep1&type=pdf 11-3-16>
+Downloaded from: <http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=237E415FCEE4528600B201AC44CB51A0?doi=10.1.1.54.7332&rep=rep1&type=pdf>
 
 Review by Willem Thorbecke
 
 This paper explores the evolution of phonetics using a society of speech robots. One such experiment in this paper used machine learning to create a function that takes as an input vowel sounds and outputs a metric of difficult to expose a more prominent explanation of why certain vowel sounds are so prominent. This experiment used machine learning to parameters including lips, jaw, larynx, and tongue, to correctly model the difficulty of each vowel sound. The paper concluded that a large factor in the popularity of a given syllable was the acoustic efficiency and articulatory cost of said syllable.
 
 Luc Steels, “The synthetic modeling of language origins”
-Downloaded from: <https://www.csl.sony.fr/downloads/papers/1997/web-coe.pdf 11-3-2016>
+Downloaded from: <https://www.csl.sony.fr/downloads/papers/1997/web-coe.pdf>
 
 Review by Willem Thorbecke
 
