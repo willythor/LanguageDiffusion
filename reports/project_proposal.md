@@ -9,6 +9,7 @@ Github: https://github.com/willythor/LanguageDiffusion
 
 
 
+### Bibliography:
 
 <https://fatiherikli.github.io/language-evolution-simulation/>
 This is a link to a javascript implementation of agent-based simulation in language evolution context. Even though this is not an academic paper, the experiment that this simulation is replicating is very relevant to the topic that we are trying to investigate. In this agent-based model, there is a number of agents from three distinct islands with different vocabulary. The experiment simulates the random interactions between those agents and introduces the mutations among the vocabularies. It does not seem like this simulation has a meaningful conclusion or result, so it would be our job to extend this simulation by adding more detailed agent interactions and observing the result to come up with a meaningful conclusion.
@@ -32,6 +33,8 @@ Review by Willem Thorbecke
 
 This paper delves into the various aspects of the formation of a language. This includes the fact that language is diffused in a cultural manner instead of in a genetic fashion (memetic). Language evolution is also a product of factors such as communicative success, and a minimization of brain processing. Thus language is often a product of functionality more than anything else. The paper was more or less inconclusive, but stated that the three main areas of research that seem most promising are genetic evolution, cultural adaptation, and genetic assimilation.
 
+### Results from Papers:
+
 ![Diagram 1](diagram1.png)
 
 This figure predicts the probability of a clash between a vowel and consonant based upon the acoustic efficiency and articulatory cost of the clash of each vowel and consonant. This was done through modeling vocal tracts and adjusting it through machine learning.
@@ -40,7 +43,7 @@ This figure predicts the probability of a clash between a vowel and consonant ba
 
 Above image is a visualization of the language evolution simulation mentioned in part 3 of this document. A black dot represent an agent with a certain set of vocabularies. Agents from different islands have different vocabularies and there is a random chance of interaction among the agents. This simulation has a fairly simple rules for the interactions between the agents (10% chance of random letter mutation, etc). We plan to extend this simulation to reflect more accurate model of language diffusion, by referring to actual linguistic models and studies.
 
-5) Sketch what the results from these experiments might look like, possibly using a cartoon of a graphical result.  Explain how you will interpret the results
+### Sketch:
 
 ![Diagram 3](diagram3.png)
 
