@@ -1,15 +1,13 @@
 Github: https://github.com/willythor/LanguageDiffusion
 
-A Simple Model for Language Diffusion 
+# A Simple Model for Language Diffusion 
 
-Sungwoo Park, Willem Thorbecke, Ziyu (Selina) Wang
+## Sungwoo Park, Willem Thorbecke, Ziyu (Selina) Wang
 
-
-2) An abstract that identifies the topics you intend to investigate and the tools you plan to use.
-Abstract: (tools and topics) We plan on modeling the diffusion of multiple languages into either a pidgin or creole language. We plan on using cellular automata as well as evolutionary algorithms used to model the transfer of knowledge via a memetic structure. 
+### Abstract:
 
 
-3) An annotated bibliography of 3-5 papers that relate to your topic and/or tools.  Explain what the papers are about, what experiments they report, and what their primary conclusions are.
+
 
 
 <https://fatiherikli.github.io/language-evolution-simulation/>
@@ -18,7 +16,6 @@ This is a link to a javascript implementation of agent-based simulation in langu
 Agent-based modeling of Language Evolution
 <http://www.aclweb.org/anthology/W14-0510>
 This paper models the process of language evolution through a simulation model called a language game simulation. In this model, artificial agents interact with each other to reach a cooperative goal: to create a shared language. Based on a certain set of rules, agents attempt a conversation. If both agents can understand the conversation, the conversation becomes a part of the language. If a conversation isn’t successful, the agents attempt to create a new set of words that other agent would be able to understand.
-
 
 Berrah, Glotin, Laboissiere, Bessiere, Boe, “From Form to Formation of Phonetic Structures: An evolutionary computing perspective”
 
@@ -35,8 +32,6 @@ Review by Willem Thorbecke
 
 This paper delves into the various aspects of the formation of a language. This includes the fact that language is diffused in a cultural manner instead of in a genetic fashion (memetic). Language evolution is also a product of factors such as communicative success, and a minimization of brain processing. Thus language is often a product of functionality more than anything else. The paper was more or less inconclusive, but stated that the three main areas of research that seem most promising are genetic evolution, cultural adaptation, and genetic assimilation.
 
-4) Present 1-3 experiments from these papers that you plan to replicate and 1-3 extensions or variations of those experiments you are considering.
-
 ![Diagram 1](diagram1.png)
 
 This figure predicts the probability of a clash between a vowel and consonant based upon the acoustic efficiency and articulatory cost of the clash of each vowel and consonant. This was done through modeling vocal tracts and adjusting it through machine learning.
@@ -51,7 +46,7 @@ Above image is a visualization of the language evolution simulation mentioned in
 
 Before a language evolution takes place, vocabularies from three different regions are quite different, as shown in the different “most used word.” If the most used word from three regions become similar as a result of the simulation, I think we can conclude that the language evolution has taken place.
 
-6) Learning Goals
+### Learning Goals:
 Sung: My learning goal for the second half of the semester is to get a good grasp of the choice of complexity science model that I choose to do my project on. I was hoping to get a new tool and perspective to solve complex problems that I might encounter in the future. By implementing agent-based model to study the process of language evolution and diffusion, I think I can accomplish the aforementioned goals.
 
 Willem: I’d like to learn about the researched and documented theories that describe the diffusion of languages as well as the what simplified rules would allow for a reasonably accurate model of language diffusion. I understand that multiple forms of modeling may help us achieve an accurate representation of language diffusion thus I’d also like to learn more about these tools and how to efficiently utilize them. 
