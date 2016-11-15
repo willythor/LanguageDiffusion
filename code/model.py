@@ -43,6 +43,7 @@ class LanguageModel(Model):
         """Advance the model by one step"""
         self.schedule.step()
 
+
 if __name__ == '__main__':
     example_model = LanguageModel(10,20,20)
     #example_model.step()
