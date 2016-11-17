@@ -51,7 +51,18 @@ class LanguageAgent(Agent):
                     pass
                 except KeyError:
                     pass
-                   
+
+    def get_agent_popular_words(self):
+        """
+        Return this agents most popular words in a list of tuples.
+        The tuple has a form (object, word)
+        """
+        pop_word_li = []
+        for object_name in language:
+            pop_word_li.append((object_name, key = language[object_name].get))
+
+        return pop_word_li
+ 
 
     def interact(self, discovery):
         """models the interaction between two agents in the same cell
@@ -95,45 +106,6 @@ class LanguageAgent(Agent):
             else: 
                 #if peer doesn't know this object, add it to peer's langauge
                 peer.language[discovery] = {max(self.language[discovery], key = self.language[discovery].get): 1}
-                peer_word = self_word
-
-
-            #checks if each agent's word for the given object has changed throughout this interaction
-            if peer_word != max(peer.language[discovery], key = peer.language[discovery].get):
-                peer_word_change == True
-            if self_word != max(self.language[discovery], key = self.language[discovery].get):
-                self_word_change == True
-
-
-            #checks if the object is in the global languages dict
-            if discovery in self.model.global_languages:
-                #if word has changed, decriment it from the global languages dict, provided it exists
-                if self_word_change:
-                    try:
-                        self.model.global_languages[discovery][self_word] -= 1
-                    #if word doesn't exist, that's fine, nobody's using it anyway
-                    except KeyError:
-                        pass
-                #if word hasn't changed check if its in the global language dict
-                else:
-                    if self_word in self.model.global_languages[discovery]:
-                        self.model.global_languages[discovery][self_word] += 1
-                    elif self_word not in self.model.global_languages[discovery]: 1
-
-                if peer_word_change:
-                    try:
-                        self.model.global_languages[discovery][peer_word] -= 1
-                    #if word doesn't exist, that's fine, nobody's using it anyway
-                    except KeyError:
-                        pass
-                else:
-                    if self_word in self.model.global_languages[discovery]:
-                        self.model.global_languages[discovery][self_word] += 1
-                    elif self_word not in self.model.global_languages[discovery]: 1
-
-            #if word not in master list, add self_word twice because it's now shared by the two agents in this interaction
-            else:
-                self.model.global_languages[discovery] = {self_word: 2}
 
 
     def word_gen(self):        
