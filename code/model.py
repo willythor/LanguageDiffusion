@@ -51,7 +51,25 @@ class LanguageAgent(Agent):
                     pass
                 except KeyError:
                     pass
-                   
+
+    def get_agent_popular_words(self):
+        """
+        Return this agents most popular words in a list of tuples.
+        The tuple has a form (object, word)
+        """
+        pop_word_li = []
+        if len(self.language) == 0:
+            return None
+
+        for object_name in self.language:
+            print(self.language)
+            if len(self.language[object_name]) == 0:
+                pop_word_li.append((object_name,None))
+                continue
+            pop_word_li.append((object_name, max(self.language, key = self.language[object_name].get)))
+
+        return pop_word_li
+ 
 
     def interact(self, discovery):
         """models the interaction between two agents in the same cell
@@ -95,7 +113,7 @@ class LanguageAgent(Agent):
             else: 
                 #if peer doesn't know this object, add it to peer's langauge
                 peer.language[discovery] = {max(self.language[discovery], key = self.language[discovery].get): 1}
-            
+
 
     def word_gen(self):        
         l1 = random.choice(self.consanants)
@@ -140,7 +158,17 @@ class LanguageModel(Model):
             self.grid.place_agent(a, (x,y))
 
     def update_global_language(self):
+        self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
         for agent in self.schedule.agents:
+            if agent.get_agent_popular_words() is None:
+                continue
+            for i in agent.get_agent_popular_words():
+                object_name = i[0]
+                object_word = i[1]
+                if (object_word) is None:
+                    continue
+                self.global_languages[object_name][object_word] = self.global_languages[object_name].get(object_word, 0) + 1
+
             
        
     def get_most_popular_words(self):
