@@ -12,64 +12,87 @@ class LanguageAgent(Agent):
         self.objects = ["banana", "apple", "pear", "orange"]
         self.consanants = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Z']
         self.vowels = ['A', 'E', 'I', 'O', 'U', 'Y']
+        
+        #dict containing all the agent's known objects
+        #where the value of each object is another dict containing all the ways the agent knows to say that object (i.e., the word for that object)
+        #the value of each known word is the number of times the agent has been exposed to that word in an interaction
         self.language = {}
+
+        #True when an agent is interacting with another agent
         self.interacting = False
     
     def step(self):
         self.move()
+
+        #50 percent chance of agent discovering an object 
         if random.choice([True, False]):
+
             discovery = random.choice(self.objects)
+
+            #if the agent has already discovered this object, then attempt to interact with a cellmate
             if discovery in self.language:
                 self.interact(discovery)
+
+            #if agent has not discovered object, add it to language dict and then attempt to interact with a cellmate
             else:
                 self.language[discovery] = {self.word_gen(): 1}
                 self.interact(discovery)
 
     def interact(self, discovery):
 
+        #all the agents in the agents cell
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
 
         if len(cellmates) > 1:
+        
             self.interacting = True
-
             peer = random.choice(cellmates)
             peer.interacting = True
 
+            #from the agent's language dict, selects the most popular word for the discovered object
             self_word = max(self.language[discovery], key = self.language[discovery].get)
 
             if discovery in peer.language:
 
+                #selects the peer's most popular word choice for the discovered object
                 peer_word = max(peer.language[discovery], key = peer.language[discovery].get)
 
+                #if the agents possess each other's words, then increment the popularity of those words
                 if self_word in peer.language[discovery]:
                     peer.language[discovery][self_word] += 1
 
-                elif peer_word in self.language[discovery]:
+                if peer_word in self.language[discovery]:
                     self.language[discovery][peer_word] += 1
 
+                #if the agents don't possess each other's words, then add them to each other's language
+                if self_word not in peer.language[discovery]:
+                    peer.language[discovery][self_word] = 1
+
+                if peer_word not in self.language[discovery]:
+                    self.language[discovery][peer_word] = 1
+
             else: 
+                #if peer doesn't know this object, add it to peer's langauge
                 peer.language[discovery] = {max(self.language[discovery], key = self.language[discovery].get): 1}
                 peer_word = self_word
 
-            # print('peer: ' + discovery + " = " + max(peer.language[discovery], key = peer.language[discovery].get))
-            # print('instigator ' + discovery + " = " + max(self.language[discovery], key = self.language[discovery].get))
 
-            #update master list in model
-            #if object not in master list, add it
-            if discovery in self.model.language:
+            #update global languages dict in model
+            #if object not in global languages dict, add it
+            if discovery in self.model.global_languages:
                 #if peer or self word in master language, increment it, else add it
-                if peer_word in self.model.language[discovery]:
-                    self.model.language[discovery][peer_word] += 1
-                elif peer_word not in self.model.language[discovery]:
-                    self.model.language[discovery][peer_word] = 1
+                if peer_word in self.model.global_languages[discovery]:
+                    self.model.global_languages[discovery][peer_word] += 1
+                elif peer_word not in self.model.global_languages[discovery]:
+                    self.model.global_languages[discovery][peer_word] = 1
 
-                if self_word in self.model.language[discovery]:
-                     self.model.language[discovery][self_word] += 1
-                elif self_word not in self.model.language[discovery]: 1
+                if self_word in self.model.global_languages[discovery]:
+                    self.model.global_languages[discovery][self_word] += 1
+                elif self_word not in self.model.global_languages[discovery]: 1
 
             #if word not in master list, add self_word twice because it's now shared by the two agents in this interaction
             else:
-                self.model.language[discovery] = {self_word: 2}
+                self.model.global_languages[discovery] = {self_word: 2}
 
 
     def word_gen(self):        
@@ -84,11 +107,6 @@ class LanguageAgent(Agent):
         self.model.grid.move_agent(self, new_position)
         self.interacting = False
 
-class LanguageObject(Agent):
-    """An object that an agent identifies"""
-    def __init__(self):
-        self.name = "banana"
-
 class LanguageModel(Model):
     """A model simulating the language diffusion"""
 
@@ -102,7 +120,11 @@ class LanguageModel(Model):
         #Grid third parameters - Boolean for wrapping around
         self.grid = MultiGrid(width, height, True)
         self.schedule = RandomActivation(self)
-        self.language = {}
+
+        #dict containing all the globally known objects
+        #where the value of each object is another dict containing all the currently used words for that object
+        #the value of each word is the number of agents who use that word
+        self.global_languages = {}
 
 
 
