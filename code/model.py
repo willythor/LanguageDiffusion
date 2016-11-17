@@ -182,10 +182,25 @@ class LanguageModel(Model):
         # #how to collect data!???
         # self.datacollector = DataCollector(
         # model_reporters={"Gini": compute_gini})
-        
+       
+    def get_most_popular_words(self):
+        """
+           Returns a list of most popular words and its frequency for each object in tuple form (object name, word, frequency)
+        """
+        pop_word_li = []
+        for object_name in self.global_languages:
+            #A word mapping that most number of agents in the model uses for a particular object
+            most_pop_word = max(self.global_languages[object_name], key = self.global_languages[object_name].get)
+            #A number of agents that use this word
+            pop_word_freq = self.global_languages[object_name][most_pop_word]
+            pop_word_li.append((object_name, most_pop_word, pop_word_freq))
+
+        return pop_word_li
+
     def step(self):
         """Advance the model by one step"""
-        print(self.global_languages)
+
+        print(self.get_most_popular_words())
         self.schedule.step()
 
 
