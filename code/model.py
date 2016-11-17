@@ -95,46 +95,7 @@ class LanguageAgent(Agent):
             else: 
                 #if peer doesn't know this object, add it to peer's langauge
                 peer.language[discovery] = {max(self.language[discovery], key = self.language[discovery].get): 1}
-                peer_word = self_word
-
-
-            #checks if each agent's word for the given object has changed throughout this interaction
-            if peer_word != max(peer.language[discovery], key = peer.language[discovery].get):
-                peer_word_change == True
-            if self_word != max(self.language[discovery], key = self.language[discovery].get):
-                self_word_change == True
-
-
-            #checks if the object is in the global languages dict
-            if discovery in self.model.global_languages:
-                #if word has changed, decriment it from the global languages dict, provided it exists
-                if self_word_change:
-                    try:
-                        self.model.global_languages[discovery][self_word] -= 1
-                    #if word doesn't exist, that's fine, nobody's using it anyway
-                    except KeyError:
-                        pass
-                #if word hasn't changed check if its in the global language dict
-                else:
-                    if self_word in self.model.global_languages[discovery]:
-                        self.model.global_languages[discovery][self_word] += 1
-                    elif self_word not in self.model.global_languages[discovery]: 1
-
-                if peer_word_change:
-                    try:
-                        self.model.global_languages[discovery][peer_word] -= 1
-                    #if word doesn't exist, that's fine, nobody's using it anyway
-                    except KeyError:
-                        pass
-                else:
-                    if self_word in self.model.global_languages[discovery]:
-                        self.model.global_languages[discovery][self_word] += 1
-                    elif self_word not in self.model.global_languages[discovery]: 1
-
-            #if word not in master list, add self_word twice because it's now shared by the two agents in this interaction
-            else:
-                self.model.global_languages[discovery] = {self_word: 2}
-
+            
 
     def word_gen(self):        
         l1 = random.choice(self.consanants)
@@ -178,10 +139,9 @@ class LanguageModel(Model):
             y = random.randrange(self.grid.height)
             self.grid.place_agent(a, (x,y))
 
-
-        # #how to collect data!???
-        # self.datacollector = DataCollector(
-        # model_reporters={"Gini": compute_gini})
+    def update_global_language(self):
+        for agent in self.schedule.agents:
+            
        
     def get_most_popular_words(self):
         """
@@ -200,7 +160,7 @@ class LanguageModel(Model):
     def step(self):
         """Advance the model by one step"""
 
-        print(self.get_most_popular_words())
+        self.update_global_language()
         self.schedule.step()
 
 
