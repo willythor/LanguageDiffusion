@@ -37,8 +37,29 @@ class LanguageAgent(Agent):
             else:
                 self.language[discovery] = {self.word_gen(): 1}
                 self.interact(discovery)
+        else:
+            #if no object is discovered, check if agent has cellmate(s) and if so, have a conversation with a cellmate
+            cellmates = self.model.grid.get_cell_list_contents([self.pos])
+
+            if len(cellmates) > 1:
+                #randomly picks an object to speak about, provided the agent knows any words for objects 
+                try: 
+                    conversation_topic = random.choice(self.language)
+                    self.interact(conversation_topic)
+                #agent can't have a conversation if it doesnt know any words
+                except IndexError:
+                    pass
+                except KeyError:
+                    pass
+                   
 
     def interact(self, discovery):
+        """models the interaction between two agents in the same cell
+        """
+
+        #keeps track of whether an agents word for an object has changed because of this interaction
+        self_word_change = False
+        peer_word_change = False
 
         #all the agents in the agents cell
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
@@ -77,18 +98,38 @@ class LanguageAgent(Agent):
                 peer_word = self_word
 
 
-            #update global languages dict in model
-            #if object not in global languages dict, add it
-            if discovery in self.model.global_languages:
-                #if peer or self word in master language, increment it, else add it
-                if peer_word in self.model.global_languages[discovery]:
-                    self.model.global_languages[discovery][peer_word] += 1
-                elif peer_word not in self.model.global_languages[discovery]:
-                    self.model.global_languages[discovery][peer_word] = 1
+            #checks if each agent's word for the given object has changed throughout this interaction
+            if peer_word != max(peer.language[discovery], key = peer.language[discovery].get):
+                peer_word_change == True
+            if self_word != max(self.language[discovery], key = self.language[discovery].get):
+                self_word_change == True
 
-                if self_word in self.model.global_languages[discovery]:
-                    self.model.global_languages[discovery][self_word] += 1
-                elif self_word not in self.model.global_languages[discovery]: 1
+
+            #checks if the object is in the global languages dict
+            if discovery in self.model.global_languages:
+                #if word has changed, decriment it from the global languages dict, provided it exists
+                if self_word_change:
+                    try:
+                        self.model.global_languages[discovery][self_word] -= 1
+                    #if word doesn't exist, that's fine, nobody's using it anyway
+                    except KeyError:
+                        pass
+                #if word hasn't changed check if its in the global language dict
+                else:
+                    if self_word in self.model.global_languages[discovery]:
+                        self.model.global_languages[discovery][self_word] += 1
+                    elif self_word not in self.model.global_languages[discovery]: 1
+
+                if peer_word_change:
+                    try:
+                        self.model.global_languages[discovery][peer_word] -= 1
+                    #if word doesn't exist, that's fine, nobody's using it anyway
+                    except KeyError:
+                        pass
+                else:
+                    if self_word in self.model.global_languages[discovery]:
+                        self.model.global_languages[discovery][self_word] += 1
+                    elif self_word not in self.model.global_languages[discovery]: 1
 
             #if word not in master list, add self_word twice because it's now shared by the two agents in this interaction
             else:
@@ -144,7 +185,7 @@ class LanguageModel(Model):
         
     def step(self):
         """Advance the model by one step"""
-        print(self.language)
+        print(self.global_languages)
         self.schedule.step()
 
 
