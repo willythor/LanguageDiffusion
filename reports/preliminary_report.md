@@ -50,6 +50,9 @@ The language evolution agent-based model that we are creating is inspired and lo
 
 **Results**:
 
+![dist](dist.png)
+Format: ![Alt Text](url)
+
 **Intepretations**:
 
 ### Learning Goals:
