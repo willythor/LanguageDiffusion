@@ -172,6 +172,9 @@ class LanguageModel(Model):
         """
         pop_word_li = []
         for object_name in self.global_languages:
+            if (len(self.global_languages[object_name]) == 0):
+                pop_word_li.append((object_name, None, 0))
+                continue
             #A word mapping that most number of agents in the model uses for a particular object
             most_pop_word = max(self.global_languages[object_name], key = self.global_languages[object_name].get)
             #A number of agents that use this word
@@ -184,6 +187,7 @@ class LanguageModel(Model):
         """Advance the model by one step"""
 
         self.update_global_language()
+        print(self.get_most_popular_words())
         self.schedule.step()
 
 
