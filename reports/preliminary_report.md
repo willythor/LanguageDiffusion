@@ -49,8 +49,8 @@ The language evolution agent-based model that we are creating is inspired and lo
 **Methodology**: We are creating an agent-based model with a few simple rules that dictate how new vocabulary is formed and how different agents share their set of vocabularies. In this model, we treat language as a set of object-word mappings. There are three ways an agent acquires a new object-word mapping (learning a new word). First way is the discovery of an object and assigning an arbitrary word for that object. In each step of simulation, there is a small chance that an agent will discover an object that it has not known before and it will generate a new word for that. Second way is learning from other agent. When two agents are adjacent to each other, a coversation happens. During a conversation, two agents will talk about certain object. If one object already has a word for that object but other does not, then the agent that does not know the word learns that word. The third case is when two agents have different word for same object during the conversation. In this case, the agents remembers how other agent refered to the object and adds other agents object-word mapping into its "memory bank". If an agent hears a specific object-word mapping more than what it is current using, it adapts the other object-word mapping, which is more popular.
 
 **Results**:
-Our experiment ran with 100 agents for 500 steps produced these words for our chosen objects. 
-[('pear', 'SAD', 15), ('banana', 'GUB', 9), ('orange', 'SAV', 11), ('apple', 'REL', 10)]
+Our experiment ran with 100 agents for 500 steps produced these words in one of our runs:
+[('pear', 'SAD', 15), ('banana', 'GUB', 9), ('orange', 'SAV', 11), ('apple', 'REL', 10)]. 
 The number to the right of the word is the prominence of the word among all the agents, e.g., 15 agents use the word 'SAD' for a pear.
 
 Below is a distribution for all the words in use for a pear. 
@@ -58,10 +58,10 @@ Below is a distribution for all the words in use for a pear.
 ![dist](dist.png)
 Format: ![Alt Text](url)
 
-**Intepretations**:
-When we ran the experiment we found that the agents converged on two or three prominent words for any given object. The prominence of these words shifted every 100 or so steps, once the simulation has passed its chaotic transient state. An example of this was that the most prominent word for Orange is 'HUR' at step 900 with 8 agents using the word, but then switches to 'KYW' at around step 950, with 9 agents using the word. 
+**Interpretations**:
+When we ran the experiment we found that the agents converged on two or three prominent words for any given object. The prominence of these words shifted every 100 or so steps, once the simulation had passed its chaotic transient state. An example of this was that the most prominent word for Orange is 'HUR' at step 900 with 8 agents using the word, but then switches to 'KYW' at around step 950, with 9 agents using the word. 
 Some words for objects gain so much popularity that they stay the most prominent word indefinitely. An example of this is the word for Apple, 'REK', which had 21 agents using it.
-Another thing to note is that many agents use a word for a given object that only they know. This seems like a strange result after 500 steps, but could possible be rememdied after many thousands of steps. If this proves to be the case even after thousands of steps, the results of our model to not line up with our expectations of the model.
+Another thing to note is that many agents use a word for a given object that only they know. This seems like a strange result after 500 steps, but could possible be rememdied after many thousands of steps. If this proves to be the case even after thousands of steps, the results of our model do not line up with our expectations of the model.
 
 ### Learning Goals:
 Sung: My learning goal for the second half of the semester is to get a good grasp of the choice of complexity science model that I choose to do my project on. I was hoping to get a new tool and perspective to solve complex problems that I might encounter in the future. By implementing agent-based model to study the process of language evolution and diffusion, I think I can accomplish the aforementioned goals.
