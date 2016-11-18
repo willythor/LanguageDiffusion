@@ -58,15 +58,12 @@ class LanguageAgent(Agent):
         The tuple has a form (object, word)
         """
         pop_word_li = []
-        if len(self.language) == 0:
-            return None
 
         for object_name in self.language:
-            print(self.language)
             if len(self.language[object_name]) == 0:
                 pop_word_li.append((object_name,None))
                 continue
-            pop_word_li.append((object_name, max(self.language, key = self.language[object_name].get)))
+            pop_word_li.append((object_name, max(self.language[object_name], key = self.language[object_name].get)))
 
         return pop_word_li
  
@@ -160,8 +157,6 @@ class LanguageModel(Model):
     def update_global_language(self):
         self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
         for agent in self.schedule.agents:
-            if agent.get_agent_popular_words() is None:
-                continue
             for i in agent.get_agent_popular_words():
                 object_name = i[0]
                 object_word = i[1]
