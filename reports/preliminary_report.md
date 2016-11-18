@@ -49,6 +49,11 @@ The language evolution agent-based model that we are creating is inspired and lo
 **Methodology**: We are creating an agent-based model with a few simple rules that dictate how new vocabulary is formed and how different agents share their set of vocabularies. In this model, we treat language as a set of object-word mappings. There are three ways an agent acquires a new object-word mapping (learning a new word). First way is the discovery of an object and assigning an arbitrary word for that object. In each step of simulation, there is a small chance that an agent will discover an object that it has not known before and it will generate a new word for that. Second way is learning from other agent. When two agents are adjacent to each other, a coversation happens. During a conversation, two agents will talk about certain object. If one object already has a word for that object but other does not, then the agent that does not know the word learns that word. The third case is when two agents have different word for same object during the conversation. In this case, the agents remembers how other agent refered to the object and adds other agents object-word mapping into its "memory bank". If an agent hears a specific object-word mapping more than what it is current using, it adapts the other object-word mapping, which is more popular.
 
 **Results**:
+Our experiment ran with 100 agents for 500 steps produced these words for our chosen objects. 
+[('pear', 'SAD', 15), ('banana', 'GUB', 9), ('orange', 'SAV', 11), ('apple', 'REL', 10)]
+The number to the right of the word is the prominence of the word among all the agents, e.g., 15 agents use the word 'SAD' for a pear.
+
+Below is a distribution for all the words in use for a pear. 
 
 ![dist](dist.png)
 Format: ![Alt Text](url)
