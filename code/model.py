@@ -188,6 +188,7 @@ class LanguageModel(Model):
         self.update_global_language()
         print(self.get_most_popular_words())
         self.schedule.step()
+        print(self.global_languages)
 
 
 
