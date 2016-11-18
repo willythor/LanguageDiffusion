@@ -129,8 +129,7 @@ class LanguageModel(Model):
 
     def __init__(self, N, width, height):
         """
-            engN: Number of EnglishAgent to create
-            frN: Number of FrenchAgent to create
+        N: Number of agents
         """
 
         self.num_agents = N
