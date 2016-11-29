@@ -61,7 +61,7 @@ Format: ![Alt Text](url)
 **Interpretations**:
 When we ran the experiment we found that the agents converged on two or three prominent words for any given object. The prominence of these words shifted every 100 or so steps, once the simulation had passed its chaotic transient state. An example of this was that the most prominent word for Orange is 'HUR' at step 900 with 8 agents using the word, but then switches to 'KYW' at around step 950, with 9 agents using the word. 
 Some words for objects gain so much popularity that they stay the most prominent word indefinitely. An example of this is the word for Apple, 'REK', which had 21 agents using it.
-Another thing to note is that many agents use a word for a given object that only they know. This seems like a strange result after 500 steps, but could possible be rememdied after many thousands of steps. If this proves to be the case even after thousands of steps, the results of our model do not line up with our expectations of the model.
+Another thing to note is that many agents use a word for a given object that only they know. This seems like a strange result after 500 steps, but could possibly be rememdied after many thousands of steps. If this proves to be the case even after thousands of steps, the results of our model do not line up with our expectations of the model.
 
 ### Learning Goals:
 Sung: My learning goal for the second half of the semester is to get a good grasp of the choice of complexity science model that I choose to do my project on. I was hoping to get a new tool and perspective to solve complex problems that I might encounter in the future. By implementing agent-based model to study the process of language evolution and diffusion, I think I can accomplish the aforementioned goals.
