@@ -31,28 +31,22 @@ class LanguageAgent(Agent):
 
             discovery = random.choice(self.objects)
 
-            #if the agent has already discovered this object, then attempt to interact with a cellmate
-            if discovery in self.language:
-                self.interact(discovery)
-
             #if agent has not discovered object, add it to language dict and then attempt to interact with a cellmate
-            else:
-                self.language[discovery] = {self.word_gen(): 1}
-                self.interact(discovery)
-        else:
-            #if no object is discovered, check if agent has cellmate(s) and if so, have a conversation with a cellmate
-            cellmates = self.model.grid.get_cell_list_contents([self.pos])
+            if discovery not in self.language:
+                self.language[discovery] = {self.word_gen(): 1}    
 
-            if len(cellmates) > 1:
-                #randomly picks an object to speak about, provided the agent knows any words for objects 
-                try: 
-                    conversation_topic = random.choice(self.language)
-                    self.interact(conversation_topic)
-                #agent can't have a conversation if it doesnt know any words
-                except IndexError:
-                    pass
-                except KeyError:
-                    pass
+            self.interact(discovery)
+
+        if len(self.model.grid.get_neighbors(self.pos,moore=True,include_center=False)) > 0:
+
+            try: 
+                conversation_topic = random.choice(self.language)
+                self.interact(conversation_topic)
+            #agent can't have a conversation if it doesnt know any words
+            except IndexError:
+                pass
+            except KeyError:
+                pass
 
     def get_agent_popular_words(self):
         """
@@ -84,7 +78,7 @@ class LanguageAgent(Agent):
         #A list of neighboring agents
         neighboring_agents = self.model.grid.get_neighbors(self.pos,moore=True,include_center=False)
 
-        if len(neighboring_agents) > 1:
+        if len(neighboring_agents) > 0:
         
             self.interacting = True
             peer = random.choice(neighboring_agents)
