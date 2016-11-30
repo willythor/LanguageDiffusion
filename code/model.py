@@ -131,7 +131,7 @@ class LanguageAgent(Agent):
 def most_popular_word(model):
     try:
         print('hello')
-        print(model.get_most_popular_words()[0][2])
+        print(model.get_most_popular_words()[0][1])
         return model.get_most_popular_words()[0][2]
     except IndexError:
         print('noooo')
@@ -164,7 +164,7 @@ class LanguageModel(Model):
             y = random.randrange(self.grid.height)
             self.grid.place_agent(a, (x,y))
 
-<<<<<<< HEAD
+
         #initialize data collector
         self.datacollector = DataCollector(
             #most popular word for all agents 
@@ -172,14 +172,7 @@ class LanguageModel(Model):
             agent_reporters={"Prominence": lambda a: a.wealth})
 
 
-=======
-    def get_neighboring_agents(pos):
-        """
-        Return a list of agents in the neighboring cells given the position of a cell 
-        """
-        neighboring_cells = self.grid.get_neighbors(pos, include_center=False)
-        return neighboring_cells
->>>>>>> f9583ae638b17f6dc4ccf0d2026c02e8d9af1c7e
+
 
     def update_global_language(self):
         self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
