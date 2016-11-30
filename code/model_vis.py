@@ -24,7 +24,7 @@ grid = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
 server = ModularServer(LanguageModel,
                        [grid],
                        "Language Model",
-                       100, 20, 20)
+                        50, 20, 20)
 
 server.port = 8889
 server.launch()

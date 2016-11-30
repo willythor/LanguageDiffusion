@@ -9,7 +9,8 @@ class LanguageAgent(Agent):
     """An agent speaking a certain language"""
     def __init__(self,unique_id, model):
         super().__init__(unique_id,model)
-        self.objects = ["banana", "apple", "pear", "orange"]
+        #self.objects = ["banana", "apple", "pear", "orange"]
+        self.objects = ["banana"]
         self.consanants = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Z']
         self.vowels = ['A', 'E', 'I', 'O', 'U', 'Y']
         
@@ -79,10 +80,13 @@ class LanguageAgent(Agent):
         #all the agents in the agents cell
         cellmates = self.model.grid.get_cell_list_contents([self.pos])
 
-        if len(cellmates) > 1:
+        #A list of neighboring agents
+        neighboring_agents = self.model.grid.get_neighbors(self.pos,moore=True,include_center=False)
+
+        if len(neighboring_agents) > 1:
         
             self.interacting = True
-            peer = random.choice(cellmates)
+            peer = random.choice(neighboring_agents)
             peer.interacting = True
 
             #from the agent's language dict, selects the most popular word for the discovered object
@@ -110,7 +114,6 @@ class LanguageAgent(Agent):
             else: 
                 #if peer doesn't know this object, add it to peer's langauge
                 peer.language[discovery] = {max(self.language[discovery], key = self.language[discovery].get): 1}
-
 
     def word_gen(self):        
         l1 = random.choice(self.consanants)
@@ -142,8 +145,6 @@ class LanguageModel(Model):
         #the value of each word is the number of agents who use that word
         self.global_languages = {}
 
-
-
         #Create agents
         #Add agents
         for i in range(self.num_agents):
@@ -153,9 +154,17 @@ class LanguageModel(Model):
             y = random.randrange(self.grid.height)
             self.grid.place_agent(a, (x,y))
 
+    def get_neighboring_agents(pos):
+        """
+        Return a list of agents in the neighboring cells given the position of a cell 
+        """
+        neighboring_cells = self.grid.get_neighbors(pos, include_center=False)
+        return neighboring_cells
+
     def update_global_language(self):
         self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
         for agent in self.schedule.agents:
+            print(agent.language)
             for i in agent.get_agent_popular_words():
                 object_name = i[0]
                 object_word = i[1]
@@ -188,10 +197,8 @@ class LanguageModel(Model):
         self.update_global_language()
         print(self.get_most_popular_words())
         self.schedule.step()
-        print(self.global_languages)
-
-
-
+        #print(self.global_languages)
+        print('\n\n\n')
 
 if __name__ == '__main__':
     example_model = LanguageModel(10,20,20)
