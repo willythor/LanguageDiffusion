@@ -4,6 +4,7 @@ from mesa.space import MultiGrid
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+from mesa.datacollection import DataCollector
 
 class LanguageAgent(Agent):
     """An agent speaking a certain language"""
@@ -12,7 +13,7 @@ class LanguageAgent(Agent):
         self.objects = ["banana", "apple", "pear", "orange"]
         self.consanants = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Z']
         self.vowels = ['A', 'E', 'I', 'O', 'U', 'Y']
-        
+        self.wealth = 10
         #dict containing all the agent's known objects
         #where the value of each object is another dict containing all the ways the agent knows to say that object (i.e., the word for that object)
         #the value of each known word is the number of times the agent has been exposed to that word in an interaction
@@ -124,6 +125,15 @@ class LanguageAgent(Agent):
         self.model.grid.move_agent(self, new_position)
         self.interacting = False
 
+def most_popular_word(model):
+    try:
+        print('hello')
+        print(model.get_most_popular_words()[0][2])
+        return model.get_most_popular_words()[0][2]
+    except IndexError:
+        print('noooo')
+        return 0
+
 class LanguageModel(Model):
     """A model simulating the language diffusion"""
 
@@ -153,6 +163,14 @@ class LanguageModel(Model):
             y = random.randrange(self.grid.height)
             self.grid.place_agent(a, (x,y))
 
+        #initialize data collector
+        self.datacollector = DataCollector(
+            #most popular word for all agents 
+            model_reporters={"Popular Word": most_popular_word},
+            agent_reporters={"Prominence": lambda a: a.wealth})
+
+
+
     def update_global_language(self):
         self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
         for agent in self.schedule.agents:
@@ -163,7 +181,7 @@ class LanguageModel(Model):
                     continue
                 self.global_languages[object_name][object_word] = self.global_languages[object_name].get(object_word, 0) + 1
 
-            
+      
        
     def get_most_popular_words(self):
         """
@@ -184,7 +202,7 @@ class LanguageModel(Model):
 
     def step(self):
         """Advance the model by one step"""
-
+        self.datacollector.collect(self)
         self.update_global_language()
         print(self.get_most_popular_words())
         self.schedule.step()

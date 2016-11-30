@@ -3,6 +3,7 @@ from mesa.visualization.ModularVisualization import ModularServer
 from model import *
 from mesa.visualization.modules import ChartModule
 
+
 def agent_portrayal(agent):
     portrayal = {"Shape": "circle",
                  "Color": "red",
@@ -21,8 +22,12 @@ def agent_portrayal(agent):
 grid = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
 
 
+chart = ChartModule([{"Label": "Popular Word", "Color": "Black"}],
+                    data_collector_name='datacollector')
+
+
 server = ModularServer(LanguageModel,
-                       [grid],
+                       [grid, chart],
                        "Language Model",
                        100, 20, 20)
 
