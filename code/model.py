@@ -128,7 +128,8 @@ class LanguageAgent(Agent):
         self.model.grid.move_agent(self, new_position)
         self.interacting = False
 
-def most_popular_word(model):
+def most_popular_banana(model):
+
     try:
         print('hello')
         print(model.get_most_popular_words()[0][1])
@@ -168,7 +169,7 @@ class LanguageModel(Model):
         #initialize data collector
         self.datacollector = DataCollector(
             #most popular word for all agents 
-            model_reporters={"Popular Word": most_popular_word},
+            model_reporters={"Popular Word": most_popular_banana},
             agent_reporters={"Prominence": lambda a: a.wealth})
 
 

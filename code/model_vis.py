@@ -22,7 +22,7 @@ def agent_portrayal(agent):
 grid = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
 
 
-chart = ChartModule([{"Label": "Popular Word", "Color": "Black"}],
+chart = ChartModule([{"Label": "Popular Word", "Color": "Black"}, {"Label": "Prominence", "Color": "Blue"}],
                     data_collector_name='datacollector')
 
 
