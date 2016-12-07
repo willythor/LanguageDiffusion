@@ -171,7 +171,6 @@ class LanguageModel(Model):
     def update_global_language(self):
         self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
         for agent in self.schedule.agents:
-            print(agent.language)
             for i in agent.get_agent_popular_words():
                 object_name = i[0]
                 object_word = i[1]
@@ -198,13 +197,28 @@ class LanguageModel(Model):
 
         return pop_word_li
 
+    def get_herfindahl_index(self):
+        """
+        Returns a dictionary of an object to its herfindahl index
+        """
+        d = {}
+        for object_type in self.global_languages.keys():
+            h_index = 0
+            word_list = self.global_languages[object_type].keys()
+            for word in word_list:
+                h_index += (self.global_languages[object_type][word]/self.num_agents)**2
+            d[object_type] = h_index
+        return d
+            
     def step(self):
         """Advance the model by one step"""
         self.datacollector.collect(self)
         self.update_global_language()
-        print(self.get_most_popular_words())
+        #print(self.get_most_popular_words())
         self.schedule.step()
         #print(self.global_languages)
+        print('current herfindahl index: ')
+        print(self.get_herfindahl_index())
         print('\n\n\n')
 
 if __name__ == '__main__':
