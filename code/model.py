@@ -131,6 +131,14 @@ def most_popular_word(model):
         print('noooo')
         return 0
 
+#Data collector function wrapper for get herfindahl index method
+def get_h_index(model):
+    try:
+        print('returing ', model.get_herfindahl_index()["banana"])
+        return model.get_herfindahl_index()["banana"]
+    except KeyError:
+        print('returning 0')
+        return 0
 class LanguageModel(Model):
     """A model simulating the language diffusion"""
 
@@ -162,7 +170,8 @@ class LanguageModel(Model):
         #initialize data collector
         self.datacollector = DataCollector(
             #most popular word for all agents 
-            model_reporters={"Popular Word": most_popular_word},
+            #model_reporters={"Popular Word": most_popular_word},
+            model_reporters={"Herfindahl index": get_h_index},
             agent_reporters={"Prominence": lambda a: a.wealth})
 
 
@@ -171,7 +180,6 @@ class LanguageModel(Model):
     def update_global_language(self):
         self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
         for agent in self.schedule.agents:
-            print(agent.language)
             for i in agent.get_agent_popular_words():
                 object_name = i[0]
                 object_word = i[1]
@@ -184,7 +192,7 @@ class LanguageModel(Model):
     def get_most_popular_words(self):
         """
            Returns a list of most popular words and its frequency for each object in tuple form (object name, word, frequency)
-        """
+        """ 
         pop_word_li = []
         for object_name in self.global_languages:
             if (len(self.global_languages[object_name]) == 0):
@@ -198,13 +206,28 @@ class LanguageModel(Model):
 
         return pop_word_li
 
+    def get_herfindahl_index(self):
+        """
+        Returns a dictionary of an object to its herfindahl index
+        """
+        d = {}
+        for object_type in self.global_languages.keys():
+            h_index = 0
+            word_list = self.global_languages[object_type].keys()
+            for word in word_list:
+                h_index += (self.global_languages[object_type][word]/self.num_agents)**2
+            d[object_type] = h_index
+        return d
+            
     def step(self):
         """Advance the model by one step"""
         self.datacollector.collect(self)
         self.update_global_language()
-        print(self.get_most_popular_words())
+        #print(self.get_most_popular_words())
         self.schedule.step()
         #print(self.global_languages)
+        print('current herfindahl index: ')
+        print(self.get_herfindahl_index())
         print('\n\n\n')
 
 if __name__ == '__main__':
