@@ -131,6 +131,14 @@ def most_popular_word(model):
         print('noooo')
         return 0
 
+#Data collector function wrapper for get herfindahl index method
+def get_h_index(model):
+    try:
+        print('returing ', model.get_herfindahl_index()["banana"])
+        return model.get_herfindahl_index()["banana"]
+    except KeyError:
+        print('returning 0')
+        return 0
 class LanguageModel(Model):
     """A model simulating the language diffusion"""
 
@@ -162,7 +170,8 @@ class LanguageModel(Model):
         #initialize data collector
         self.datacollector = DataCollector(
             #most popular word for all agents 
-            model_reporters={"Popular Word": most_popular_word},
+            #model_reporters={"Popular Word": most_popular_word},
+            model_reporters={"Herfindahl index": get_h_index},
             agent_reporters={"Prominence": lambda a: a.wealth})
 
 
@@ -183,7 +192,7 @@ class LanguageModel(Model):
     def get_most_popular_words(self):
         """
            Returns a list of most popular words and its frequency for each object in tuple form (object name, word, frequency)
-        """
+        """ 
         pop_word_li = []
         for object_name in self.global_languages:
             if (len(self.global_languages[object_name]) == 0):
