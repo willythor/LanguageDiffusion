@@ -99,22 +99,24 @@ The result of the simulation produces the result that we expect. Given enough ti
 
 **Question**: 
 How does different object-discovery odds affect the time it takes to reach word convergence?
-**Methodology**
-At each step we defined the chance of an agent discovering a new object. We swept through odds of discovery being 10% all the way up to 100%, incrementing by steps of 10%. For each new chance of discovery we ran 500 trials and took the average as a result.
-**Results**
 
+**Methodology**:
+At each step we defined the chance of an agent discovering a new object. We swept through odds of discovery being 10% all the way up to 100%, incrementing by steps of 10%. For each new chance of discovery we ran 500 trials and took the average as a result.
+
+**Results**:
 ![dist](discovery.png)
 
-**Interpretation**
+**Interpretation**:
 The higher the odds of discovering a new object, the faster the agents can converge on a single word for a given object. These results can be interpreted as surprising because the higher the odds of discovering a new object, the more words circulating around the grid for that object. More words for a given object should mean slower convergence right? No. If discovery odds are too low then agents take a long time to come up with words for a given object: an agent has to discover an object before it can name it. Thus many interactions between agents result in empty interactions where no words/objects are exchanged, slowing down the rate of convergence.
 
 
 **Question**:
 How does mobility of the agents affect the time it takes to reach word convergence?
-**Methodology**
+
+**Methodology**:
 At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%. 
 
-**Results**
+**Results**:
 
 ![dist](mobility.png)
 
