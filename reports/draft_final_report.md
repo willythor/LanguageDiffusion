@@ -114,7 +114,7 @@ How does mobility of the agents affect the time it takes to reach word convergen
 At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%.  
 **Results**
 ![dist](mobility.png)
-Format: ![Alt Text](url)
+
 **Interpretation**
 It takes a long time for a grid of agents to converge on a single word for a given object if the agents have low mobility. The results validate our hypothesis that the higher the mobility, the shorter it takes to reach convergence. With no mobility there is no convergence because each agent can only interact with its neighbors but not people from the other parts of the grid.  When agents have high mobility the rate of diffusion of vocabulary is very quick, because popular words from one area of a grid spread to the rest of the grid faster than when agents have low mobility. This makes sense, because in the real world humans have limited mobility (some more than other), resulting in slow convergence upon a single language, but convergence nonetheless. This is evident during colonization, for example in Hawaii native Hawaiian speakers account for 0.1% of the state population compared to nearly 100% years prior to U.S. occupation. 
 
