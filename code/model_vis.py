@@ -29,7 +29,7 @@ chart = ChartModule([{"Label": "Popular Word", "Color": "Black"}, {"Label": "Pro
 server = ModularServer(LanguageModel,
                        [grid, chart],
                        "Language Model",
-                        50, 20, 20)
+                        50, 20, 20, discovery=.3)
 
 server.port = 8889
 server.launch()

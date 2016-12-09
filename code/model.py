@@ -5,16 +5,21 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 from mesa.datacollection import DataCollector
+from itertools import count
+graph = []
+import time
 
 class LanguageAgent(Agent):
     """An agent speaking a certain language"""
-    def __init__(self,unique_id, model):
+    def __init__(self,unique_id,model,discovery,movement):
         super().__init__(unique_id,model)
-        #self.objects = ["banana", "apple", "pear", "orange"]
         self.objects = ["banana"]
         self.consanants = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Z']
         self.vowels = ['A', 'E', 'I', 'O', 'U', 'Y']
         self.wealth = 10
+        self.discovery = discovery
+        self.movement = movement
+
         #dict containing all the agent's known objects
         #where the value of each object is another dict containing all the ways the agent knows to say that object (i.e., the word for that object)
         #the value of each known word is the number of times the agent has been exposed to that word in an interaction
@@ -24,10 +29,14 @@ class LanguageAgent(Agent):
         self.interacting = False
     
     def step(self):
-        self.move()
+
+        if random.random() < self.movement:
+        	self.move()
+
 
         #50 percent chance of agent discovering an object 
-        if random.choice([True, False]):
+
+        if random.random() < self.discovery:
 
             discovery = random.choice(self.objects)
 
@@ -36,7 +45,6 @@ class LanguageAgent(Agent):
                 self.language[discovery] = {self.word_gen(): 1}    
 
             self.interact(discovery)
-
         if len(self.model.grid.get_neighbors(self.pos,moore=True,include_center=False)) > 0:
 
             try: 
@@ -125,17 +133,23 @@ class LanguageAgent(Agent):
 def most_popular_banana(model):
 
     try:
-        print('hello')
-        print(model.get_most_popular_words()[0][1])
+        # print('hello')
+        # print(model.get_most_popular_words()[0][1])
+        graph.append(model.get_most_popular_words()[0][2])
+        if model.get_most_popular_words()[0][2] == 50:
+            print(graph)
+            time.sleep(50)
         return model.get_most_popular_words()[0][2]
     except IndexError:
-        print('noooo')
+        # print('noooo')
         return 0
+
+
 
 class LanguageModel(Model):
     """A model simulating the language diffusion"""
 
-    def __init__(self, N, width, height):
+    def __init__(self, N, width, height,discovery = .5,movement =.5):
         """
         N: Number of agents
         """
@@ -144,6 +158,8 @@ class LanguageModel(Model):
         #Grid third parameters - Boolean for wrapping around
         self.grid = MultiGrid(width, height, True)
         self.schedule = RandomActivation(self)
+        self.discovery = discovery
+        self.movement = movement
 
         #dict containing all the globally known objects
         #where the value of each object is another dict containing all the currently used words for that object
@@ -153,7 +169,7 @@ class LanguageModel(Model):
         #Create agents
         #Add agents
         for i in range(self.num_agents):
-            a = LanguageAgent(i,self)
+            a = LanguageAgent(i,self,discovery = self.discovery,movement=self.movement)
             self.schedule.add(a)
             x = random.randrange(self.grid.width)
             y = random.randrange(self.grid.height)
@@ -170,9 +186,10 @@ class LanguageModel(Model):
 
 
     def update_global_language(self):
-        self.global_languages = {"banana": {}, "apple": {}, "pear": {}, "orange": {}}
+        self.global_languages = {"banana": {}}#, "apple": {}, "pear": {}, "orange": {}}
+        # self.global_languages = [{},{},{},{}]
         for agent in self.schedule.agents:
-            print(agent.language)
+            # print(agent.language)
             for i in agent.get_agent_popular_words():
                 object_name = i[0]
                 object_word = i[1]
@@ -180,7 +197,6 @@ class LanguageModel(Model):
                     continue
                 self.global_languages[object_name][object_word] = self.global_languages[object_name].get(object_word, 0) + 1
 
-      
        
     def get_most_popular_words(self):
         """
@@ -197,31 +213,27 @@ class LanguageModel(Model):
             pop_word_freq = self.global_languages[object_name][most_pop_word]
             pop_word_li.append((object_name, most_pop_word, pop_word_freq))
 
+        # print(pop_word_li)
         return pop_word_li
 
     def step(self):
         """Advance the model by one step"""
         self.datacollector.collect(self)
         self.update_global_language()
-        print(self.get_most_popular_words())
+        # print(self.get_most_popular_words())
         self.schedule.step()
-        #print(self.global_languages)
-        print('\n\n\n')
+        # print(self.global_languages)
+        # print('\n\n\n')
 
 if __name__ == '__main__':
-    example_model = LanguageModel(10,20,20)
-    #example_model.step()
+	for disc in [1.0]:
+		step_count = []
+		for i in range(500):
+			test_model = LanguageModel(50,20,20,discovery = disc)
+			for step in count():
+				if step > 50 and len(test_model.global_languages['banana']) == 1:
+					step_count.append(step)
+					break
+				test_model.step()
 
-    for i in range(5):
-
-        agent_counts = np.zeros((example_model.grid.width, example_model.grid.height))
-        for cell in example_model.grid.coord_iter():
-            cell_content, x, y = cell
-            if not cell_content:
-                agent_counts[x][y] = 1
-            #agent_count = len(cell_content)
-            #agent_counts[x][y] = agent_count
-        plt.imshow(agent_counts, interpolation='nearest')
-        plt.colorbar()
-        plt.show()
-        example_model.step()
+		print(disc,np.mean(step_count))
