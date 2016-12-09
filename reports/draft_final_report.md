@@ -102,6 +102,7 @@ How does different object-discovery odds affect the time it takes to reach word 
 **Methodology**
 At each step we defined the chance of an agent discovering a new object. We swept through odds of discovery being 10% all the way up to 100%, incrementing by steps of 10%. For each new chance of discovery we ran 500 trials and took the average as a result.
 **Results**
+
 ![dist](discovery.png)
 
 **Interpretation**
@@ -111,8 +112,10 @@ The higher the odds of discovering a new object, the faster the agents can conve
 **Question**:
 How does mobility of the agents affect the time it takes to reach word convergence?
 **Methodology**
-At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%.  
+At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%. 
+
 **Results**
+
 ![dist](mobility.png)
 
 **Interpretation**
