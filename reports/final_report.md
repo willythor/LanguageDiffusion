@@ -69,7 +69,6 @@ How object-discovery odds affect the time it takes to reach word convergence?
 At each step we defined the chance of an agent discovering a new object. We swept through odds of discovery being 10% all the way up to 100%, incrementing by steps of 10%. For each new chance of discovery we ran 500 trials and took the average as a result.
 **Results**
 ![dist](discovery.png)
-Format: ![Alt Text](url)
 *Graph of the number of steps till convergence with varing object discovery odds*
 **Interpretation**
 The figure shows that the higher the odds of discovering a new object, the faster the agents can converge on a single word for a given object. Higher odds of discovering a new object result in more words being generated during each of the early time steps, and more words for a given object should mean slower convergence right? No. If discovery odds are too low then agents take a long time to come up with words for a given object: an agent has to discover an object before it can name it. Thus many interactions between agents result in empty interactions where no words/objects are exchanged, slowing down the rate of convergence.
