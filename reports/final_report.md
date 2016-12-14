@@ -48,7 +48,6 @@ For the simulation of 50 agents in the grid of 20 by 20, the Herfindahl index re
 
 
 ![dist](herfindahl_indicies.jpg)
-Format: ![Alt Text](url)
 *Graph of change in the Herfindahl index over time*
 
 
@@ -70,6 +69,7 @@ At each step we defined the chance of an agent discovering a new object. We swep
 **Results**
 ![dist](discovery.png)
 *Graph of the number of steps till convergence with varing object discovery odds*
+
 **Interpretation**
 The figure shows that the higher the odds of discovering a new object, the faster the agents can converge on a single word for a given object. Higher odds of discovering a new object result in more words being generated during each of the early time steps, and more words for a given object should mean slower convergence right? No. If discovery odds are too low then agents take a long time to come up with words for a given object: an agent has to discover an object before it can name it. Thus many interactions between agents result in empty interactions where no words/objects are exchanged, slowing down the rate of convergence.
 
@@ -87,8 +87,8 @@ How does mobility of the agents affect the time it takes to reach word convergen
 At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%.  
 **Results**
 ![dist](mobility.png)
-Format: ![Alt Text](url)
 *Graph of the number of steps till convergence with varing agent mobility*
+
 **Interpretation**
 It takes a long time for a grid of agents to converge on a single word for a given object if the agents have low mobility. The results validate our hypothesis that the higher the mobility, the shorter it takes to reach convergence. With no mobility there is no convergence because each agent can only interact with its neighbors but not people from the other parts of the grid.  When agents have high mobility the rate of diffusion of vocabulary is very quick, because popular words from one area of a grid spread to the rest of the grid faster than when agents have low mobility. As stated in the abstract, this results coincides with historical moments of high mobility, such as colonization, resulting in language conversion.
 
