@@ -44,6 +44,7 @@ We run the model explained above with 50% chance of discovering an object. To qu
 
 
 **Results**:
+
 For the simulation of 50 agents in the grid of 20 by 20, the Herfindahl index reached 1, meaning everyone uses same word to refer to the object, after 134 steps. 
 
 
@@ -69,6 +70,7 @@ How object-discovery odds affect the time it takes to reach word convergence?
 At each step we defined the chance of an agent discovering a new object. We swept through odds of discovery being 10% all the way up to 100%, incrementing by steps of 10%. For each new chance of discovery we ran 500 trials and took the average as a result.
 
 **Results**:
+
 ![dist](discovery.png)
 *Graph of the number of steps till convergence with varing object discovery odds*
 
@@ -90,6 +92,7 @@ How does mobility of the agents affect the time it takes to reach word convergen
 At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%.  
 
 **Results**:
+
 ![dist](mobility.png)
 *Graph of the number of steps till convergence with varing agent mobility*
 
