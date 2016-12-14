@@ -29,7 +29,7 @@ Also at each time step the agents move to a random neighboring location. Then ea
 Using this model we answer questions that both pertain to real world language evolution and are relevant to the scope of our model.
 
 
-###Question, Methodology, Results, and Interpretation
+###Question, Methodology, Results, and Interpretation:
 
 
 First, we want to make sure that our model does produce an unified language.
