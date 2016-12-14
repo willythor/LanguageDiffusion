@@ -47,8 +47,8 @@ We run the model explained above with 50% chance of discovering an object. To qu
 
 For the simulation of 50 agents in the grid of 20 by 20, the Herfindahl index reached 1, meaning everyone uses same word to refer to the object, after 134 steps. 
 
-
 ![dist](herfindahl_indicies.jpg)
+
 *Graph of change in the Herfindahl index over time*
 
 
@@ -72,6 +72,7 @@ At each step we defined the chance of an agent discovering a new object. We swep
 **Results**:
 
 ![dist](discovery.png)
+
 *Graph of the number of steps till convergence with varing object discovery odds*
 
 **Interpretation**:
@@ -94,6 +95,7 @@ At each step we specified a the chance of movement for each agent. We swept thro
 **Results**:
 
 ![dist](mobility.png)
+
 *Graph of the number of steps till convergence with varing agent mobility*
 
 **Interpretation**:
