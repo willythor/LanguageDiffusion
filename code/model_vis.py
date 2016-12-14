@@ -21,13 +21,7 @@ def agent_portrayal(agent):
 
 grid = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
 
-
-<<<<<<< HEAD
-chart = ChartModule([{"Label": "Popular Word", "Color": "Black"}, {"Label": "Prominence", "Color": "Blue"}],
-=======
-chart = ChartModule([{"Label": "Herfindahl index", "Color": "Black"}],
->>>>>>> fef6df288a0dba994007d348c92a365d807bf044
-                    data_collector_name='datacollector')
+chart = ChartModule([{"Label": "Herfindahl index", "Color": "Black"}], data_collector_name='datacollector')
 
 
 server = ModularServer(LanguageModel,

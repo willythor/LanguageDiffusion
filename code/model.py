@@ -144,10 +144,6 @@ def most_popular_banana(model):
         # print('noooo')
         return 0
 
-<<<<<<< HEAD
-
-
-=======
 #Data collector function wrapper for get herfindahl index method
 def get_h_index(model):
     try:
@@ -156,7 +152,7 @@ def get_h_index(model):
     except KeyError:
         print('returning 0')
         return 0
->>>>>>> fef6df288a0dba994007d348c92a365d807bf044
+
 class LanguageModel(Model):
     """A model simulating the language diffusion"""
 
@@ -190,12 +186,8 @@ class LanguageModel(Model):
         #initialize data collector
         self.datacollector = DataCollector(
             #most popular word for all agents 
-<<<<<<< HEAD
-            model_reporters={"Popular Word": most_popular_banana},
-=======
             #model_reporters={"Popular Word": most_popular_word},
             model_reporters={"Herfindahl index": get_h_index},
->>>>>>> fef6df288a0dba994007d348c92a365d807bf044
             agent_reporters={"Prominence": lambda a: a.wealth})
 
 
@@ -205,10 +197,6 @@ class LanguageModel(Model):
         self.global_languages = {"banana": {}}#, "apple": {}, "pear": {}, "orange": {}}
         # self.global_languages = [{},{},{},{}]
         for agent in self.schedule.agents:
-<<<<<<< HEAD
-            # print(agent.language)
-=======
->>>>>>> fef6df288a0dba994007d348c92a365d807bf044
             for i in agent.get_agent_popular_words():
                 object_name = i[0]
                 object_word = i[1]
@@ -252,19 +240,12 @@ class LanguageModel(Model):
         """Advance the model by one step"""
         self.datacollector.collect(self)
         self.update_global_language()
-<<<<<<< HEAD
-        # print(self.get_most_popular_words())
-        self.schedule.step()
-        # print(self.global_languages)
-        # print('\n\n\n')
-=======
         #print(self.get_most_popular_words())
         self.schedule.step()
         #print(self.global_languages)
         print('current herfindahl index: ')
         print(self.get_herfindahl_index())
         print('\n\n\n')
->>>>>>> fef6df288a0dba994007d348c92a365d807bf044
 
 if __name__ == '__main__':
 	for disc in [1.0]:
