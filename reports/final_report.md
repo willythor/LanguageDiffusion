@@ -16,7 +16,7 @@ This model investigates the process of language formation through the use of an 
 
 
 
-###Experiments
+###Experiments:
 The language formation model that we create is inspired by and loosely based on a similar experiment from “A Self Organizing Spatial Vocabulary” (Steels, 1995). The paper defines a set of rules that governs the interactions between agents that lead to the formation of a shared language. 
 
 
