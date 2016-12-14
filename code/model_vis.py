@@ -21,15 +21,13 @@ def agent_portrayal(agent):
 
 grid = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
 
-
-chart = ChartModule([{"Label": "Herfindahl index", "Color": "Black"}],
-                    data_collector_name='datacollector')
+chart = ChartModule([{"Label": "Herfindahl index", "Color": "Black"}], data_collector_name='datacollector')
 
 
 server = ModularServer(LanguageModel,
                        [grid, chart],
                        "Language Model",
-                        50, 20, 20)
+                        50, 20, 20, discovery=.3)
 
 server.port = 8889
 server.launch()

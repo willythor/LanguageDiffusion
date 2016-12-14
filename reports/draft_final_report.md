@@ -90,7 +90,7 @@ For the simulation of 50 agents in the grid of 20 by 20, the Herfindahl index re
 
 Below is the graph of change in the Herfindahl index over time.
 ![dist](herfindahl.png)
-Format: ![Alt Text](url)
+
 
 
 **Interpretation**:
@@ -99,22 +99,28 @@ The result of the simulation produces the result that we expect. Given enough ti
 
 **Question**: 
 How does different object-discovery odds affect the time it takes to reach word convergence?
-**Methodology**
+
+**Methodology**:
 At each step we defined the chance of an agent discovering a new object. We swept through odds of discovery being 10% all the way up to 100%, incrementing by steps of 10%. For each new chance of discovery we ran 500 trials and took the average as a result.
-**Results**
+
+**Results**:
+
 ![dist](discovery.png)
-Format: ![Alt Text](url)
-**Interpretation**
+
+**Interpretation**:
 The higher the odds of discovering a new object, the faster the agents can converge on a single word for a given object. These results can be interpreted as surprising because the higher the odds of discovering a new object, the more words circulating around the grid for that object. More words for a given object should mean slower convergence right? No. If discovery odds are too low then agents take a long time to come up with words for a given object: an agent has to discover an object before it can name it. Thus many interactions between agents result in empty interactions where no words/objects are exchanged, slowing down the rate of convergence.
 
 
 **Question**:
 How does mobility of the agents affect the time it takes to reach word convergence?
-**Methodology**
-At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%.  
-**Results**
+
+**Methodology**:
+At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%. 
+
+**Results**:
+
 ![dist](mobility.png)
-Format: ![Alt Text](url)
+
 **Interpretation**
 It takes a long time for a grid of agents to converge on a single word for a given object if the agents have low mobility. The results validate our hypothesis that the higher the mobility, the shorter it takes to reach convergence. With no mobility there is no convergence because each agent can only interact with its neighbors but not people from the other parts of the grid.  When agents have high mobility the rate of diffusion of vocabulary is very quick, because popular words from one area of a grid spread to the rest of the grid faster than when agents have low mobility. This makes sense, because in the real world humans have limited mobility (some more than other), resulting in slow convergence upon a single language, but convergence nonetheless. This is evident during colonization, for example in Hawaii native Hawaiian speakers account for 0.1% of the state population compared to nearly 100% years prior to U.S. occupation. 
 
