@@ -64,13 +64,15 @@ Now that we know our model does produce convergence, we want to investigate the 
 
 **Question**: 
 How object-discovery odds affect the time it takes to reach word convergence?
-**Methodology**
+
+**Methodology**:
 At each step we defined the chance of an agent discovering a new object. We swept through odds of discovery being 10% all the way up to 100%, incrementing by steps of 10%. For each new chance of discovery we ran 500 trials and took the average as a result.
-**Results**
+
+**Results**:
 ![dist](discovery.png)
 *Graph of the number of steps till convergence with varing object discovery odds*
 
-**Interpretation**
+**Interpretation**:
 The figure shows that the higher the odds of discovering a new object, the faster the agents can converge on a single word for a given object. Higher odds of discovering a new object result in more words being generated during each of the early time steps, and more words for a given object should mean slower convergence right? No. If discovery odds are too low then agents take a long time to come up with words for a given object: an agent has to discover an object before it can name it. Thus many interactions between agents result in empty interactions where no words/objects are exchanged, slowing down the rate of convergence.
 
 
@@ -83,13 +85,15 @@ Another parameter of interest is the mobility of each agent.
 
 **Question**:
 How does mobility of the agents affect the time it takes to reach word convergence?
-**Methodology**
+
+**Methodology**:
 At each step we specified a the chance of movement for each agent. We swept through the odds of movement being 10% all the way up to 100%, incrementing by steps of 10%.  
-**Results**
+
+**Results**:
 ![dist](mobility.png)
 *Graph of the number of steps till convergence with varing agent mobility*
 
-**Interpretation**
+**Interpretation**:
 It takes a long time for a grid of agents to converge on a single word for a given object if the agents have low mobility. The results validate our hypothesis that the higher the mobility, the shorter it takes to reach convergence. With no mobility there is no convergence because each agent can only interact with its neighbors but not people from the other parts of the grid.  When agents have high mobility the rate of diffusion of vocabulary is very quick, because popular words from one area of a grid spread to the rest of the grid faster than when agents have low mobility. As stated in the abstract, this results coincides with historical moments of high mobility, such as colonization, resulting in language conversion.
 
 
