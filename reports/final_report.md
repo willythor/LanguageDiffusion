@@ -43,9 +43,7 @@ Does our model result in the formation of an unified language?
 We run the model explained above with 50% chance of discovering an object. To quantitatively observe the process of the formation of an unified language, we monitor the [Herfindahl Index](https://en.wikipedia.org/wiki/Herfindahl_index).  For the sake of simplification, there is only one object in this simulation.
 
 
-**Results**:
-
-For the simulation of 50 agents in the grid of 20 by 20, the Herfindahl index reached 1, meaning everyone uses same word to refer to the object, after 134 steps. 
+**Results**: 
 
 ![dist](herfindahl_indicies.jpg)
 
